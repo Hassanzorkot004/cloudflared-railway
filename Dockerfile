@@ -7,6 +7,12 @@ RUN wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/c
     dpkg -i cloudflared-linux-amd64.deb
 
 COPY config.yml /etc/cloudflared/config.yml
-RUN printf '%s\n' "$CREDENTIALS_JSON" > /etc/cloudflared/credentials.json
+RUN echo '{' > /etc/cloudflared/credentials.json && \
+    echo '  "AccountTag": "53e15fa7bb78e28e77d01889ea8c58fa",' >> /etc/cloudflared/credentials.json && \
+    echo '  "TunnelSecret": "8qlBIuR9pEr8m0C7SG4saDDj404axYhgUkOM3NPg0rc=",' >> /etc/cloudflared/credentials.json && \
+    echo '  "TunnelID": "01520cf3-fd88-4da8-9286-e5bf698b81c4",' >> /etc/cloudflared/credentials.json && \
+    echo '  "Endpoint": ""' >> /etc/cloudflared/credentials.json && \
+    echo '}' >> /etc/cloudflared/credentials.json
+
 
 CMD ["cloudflared", "tunnel", "--config", "/etc/cloudflared/config.yml", "run"]
