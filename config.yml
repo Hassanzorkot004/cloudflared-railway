@@ -1,0 +1,11 @@
+tunnel: 01520cf3-fd88-4da8-9286-e5bf698b81c4
+credentials-file: C:\Users\hassa\.cloudflared\01520cf3-fd88-4da8-9286-e5bf698b81c4.json
+
+ingress:
+  - hostname: map.gpstraccar.xyz
+    service: http://localhost:8082
+
+  - hostname: admin.gpstraccar.xyz
+    service: http://localhost:5055
+
+  - service: http_status:404
