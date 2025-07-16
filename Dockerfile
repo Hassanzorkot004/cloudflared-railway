@@ -11,7 +11,8 @@ RUN wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/c
 
 # ✅ 4. Copier les fichiers de config dans le container
 COPY config.yml /etc/cloudflared/config.yml
-COPY credentials.json /etc/cloudflared/credentials.json
+RUN echo "$CREDENTIALS_JSON" > /etc/cloudflared/credentials.json
+
 
 # ✅ 5. Commande de démarrage du tunnel
 CMD ["cloudflared", "tunnel", "--config", "/etc/cloudflared/config.yml", "run"]
